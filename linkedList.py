@@ -36,16 +36,31 @@ class LinkedList:
             self.head = self.head.getNext()
             self.size -= 1
 
+    def removeTail(self):
+        current = self.head
+        previous = self.head
+
+        while current.getNext() != None:
+            previous = current
+            current = current.getNext()
+        
+        previous.setNext(None)
+        self.size -= 1
+
     def getMidpoint(self):
+
+        if self.size == 2:
+            return self.head
+
         slow = self.head
         fast = self.head
-        while (slow.getNext() != None and fast.getNext() != None):
+        while fast.getNext() != None and fast.getNext().getNext() != None:
             slow = slow.getNext()
             fast = fast.getNext().getNext()
 
         return slow
 
-    def getSize(self):
+    def length(self):
         return self.size
 
     def __str__(self):
@@ -71,4 +86,7 @@ print(testList.getMidpoint().getData(), "Get Midpoint")
 testList.removeHead()
 print(testList, "Head Removal")
 
-print(testList.getSize(), "Size")
+testList.removeTail()
+print(testList, "Tail Removal")
+
+print(testList.length(), "Size")
